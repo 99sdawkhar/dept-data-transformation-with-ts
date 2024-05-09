@@ -1,6 +1,20 @@
-import { Order } from "@commercetools/platform-sdk";
+import { Order, ProductVariantChannelAvailability } from "@commercetools/platform-sdk";
 
-export function getOrderById(id: string): Order {
+interface IOrder extends Order {
+    type: string;
+    directDiscounts: [];
+    lastModifiedBy: {
+        clientId: string;
+        isPlatformClient: boolean;
+    },
+    createdBy: {
+        clientId: string;
+        isPlatformClient: boolean;
+    },
+    transactionFee: boolean;
+}
+
+export function getOrderById(id: string): IOrder {
     return {
         type: "Order",
         id: "12397058-06d1-4b10-b195-87310661a123",
@@ -141,7 +155,7 @@ export function getOrderById(id: string): Order {
                 productType: {
                     typeId: "product-type",
                     id: "1234dd67-3eed-4c9d-b746-9780ad48e123",
-                    version: 16,
+                    // version: 16, // version doesn't exist on ProductTypeReference
                 },
                 productSlug: {
                     en: "classic-chino-short",
@@ -254,11 +268,11 @@ export function getOrderById(id: string): Order {
                     availability: {
                         channels: {
                             "123fddcb-77d1-4edd-864b-a15473106123": {
+                                id: "123b9d19-ebfb-490c-90ba-73eae6434123",
                                 isOnStock: true,
                                 availableQuantity: 1,
                                 version: 75,
-                                id: "123b9d19-ebfb-490c-90ba-73eae6434123",
-                            },
+                            } as ProductVariantChannelAvailability,
                         },
                     },
                 },
@@ -286,28 +300,28 @@ export function getOrderById(id: string): Order {
                     },
                 },
                 quantity: 1,
-                discountedPrice: {
-                    value: {
-                        type: "centPrecision",
-                        currencyCode: "EUR",
-                        centAmount: 1699,
-                        fractionDigits: 2,
-                    },
-                    includedDiscounts: [
-                        {
-                            discount: {
-                                typeId: "cart-discount",
-                                id: "1230fd33-d79e-46ac-959d-cd7dbc113123",
-                            },
-                            discountedAmount: {
-                                type: "centPrecision",
-                                currencyCode: "EUR",
-                                centAmount: 300,
-                                fractionDigits: 2,
-                            },
-                        },
-                    ],
-                },
+                // discountedPrice: { // discountedPrice doesn't exist, it exists in discountedPricePerQuantity
+                //     value: {
+                //         type: "centPrecision",
+                //         currencyCode: "EUR",
+                //         centAmount: 1699,
+                //         fractionDigits: 2,
+                //     },
+                //     includedDiscounts: [
+                //         {
+                //             discount: {
+                //                 typeId: "cart-discount",
+                //                 id: "1230fd33-d79e-46ac-959d-cd7dbc113123",
+                //             },
+                //             discountedAmount: {
+                //                 type: "centPrecision",
+                //                 currencyCode: "EUR",
+                //                 centAmount: 300,
+                //                 fractionDigits: 2,
+                //             },
+                //         },
+                //     ],
+                // },
                 discountedPricePerQuantity: [
                     {
                         quantity: 1,
@@ -397,7 +411,7 @@ export function getOrderById(id: string): Order {
                 productType: {
                     typeId: "product-type",
                     id: "1234dd67-3eed-4c9d-b746-9780ad48e123",
-                    version: 16,
+                    //version: 16, // version doesn't exist on ProductTypeReference
                 },
                 productSlug: {
                     en: "mid-length-classic-chino",
@@ -514,7 +528,7 @@ export function getOrderById(id: string): Order {
                                 availableQuantity: 44,
                                 version: 335,
                                 id: "12336a51-98d1-46ea-8062-40dc9be6a123",
-                            },
+                            } as ProductVariantChannelAvailability                            ,
                         },
                     },
                 },
@@ -542,28 +556,28 @@ export function getOrderById(id: string): Order {
                     },
                 },
                 quantity: 1,
-                discountedPrice: {
-                    value: {
-                        type: "centPrecision",
-                        currencyCode: "EUR",
-                        centAmount: 1614,
-                        fractionDigits: 2,
-                    },
-                    includedDiscounts: [
-                        {
-                            discount: {
-                                typeId: "cart-discount",
-                                id: "1230fd33-d79e-46ac-959d-cd7dbc113123",
-                            },
-                            discountedAmount: {
-                                type: "centPrecision",
-                                currencyCode: "EUR",
-                                centAmount: 285,
-                                fractionDigits: 2,
-                            },
-                        },
-                    ],
-                },
+                // discountedPrice: { // discountedPrice doesn't exist, it exists in discountedPricePerQuantity
+                //     value: {
+                //         type: "centPrecision",
+                //         currencyCode: "EUR",
+                //         centAmount: 1614,
+                //         fractionDigits: 2,
+                //     },
+                //     includedDiscounts: [
+                //         {
+                //             discount: {
+                //                 typeId: "cart-discount",
+                //                 id: "1230fd33-d79e-46ac-959d-cd7dbc113123",
+                //             },
+                //             discountedAmount: {
+                //                 type: "centPrecision",
+                //                 currencyCode: "EUR",
+                //                 centAmount: 285,
+                //                 fractionDigits: 2,
+                //             },
+                //         },
+                //     ],
+                // },
                 discountedPricePerQuantity: [
                     {
                         quantity: 1,

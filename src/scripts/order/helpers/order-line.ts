@@ -38,12 +38,15 @@ export function setOrderLines(ctOrder: Order): OrderLine[] {
               ctOrder.locale && lineItem.name[ctOrder.locale]
                 ? lineItem.name[ctOrder.locale]
                 : lineItem.name['en'],
-            ean: lineItem.variant.attributes?.find(f => f.name === 'ean')?.value,
+            ean: lineItem.variant.attributes?.find((f: { name: string, value: number }) => f.name === 'ean')?.value,
             price_unit: transformCentAmountToAmount(
               lineItem.price.value.centAmount,
               lineItem.price.value.fractionDigits,
             ),
-            discounted_price_unit: 0,
+            discounted_price_unit: transformCentAmountToAmount(
+              lineItem.discountedPricePerQuantity[0].discountedPrice.value.centAmount,
+              lineItem.discountedPricePerQuantity[0].discountedPrice.value.fractionDigits,
+            ),
             price_subtotal,
             price_total,
             price_tax: roundAmountOnTwoDecimals(price_total - price_subtotal),

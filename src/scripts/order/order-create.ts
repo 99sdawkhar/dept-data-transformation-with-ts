@@ -14,7 +14,7 @@ function orderCreate(orderId: string) {
 
     // Transform
     const couponCodes = ctOrder.discountCodes ?? [];
-    const coupon = couponCodes[0]?.discountCode?.obj?.code ?? '';
+    const coupon = couponCodes[0]?.discountCode?.obj?.code ?? ''; // no such data
   
     const order_lines: OrderLine[] = setOrderLines(ctOrder);
   
