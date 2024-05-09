@@ -50,9 +50,8 @@ Below is an example of a `ProductDraft` with dummy values as a reference.
                     centAmount: 0
                     currencyCode: "EUR"
                 }
-                country: 'nl' // added here as per PriceDraft found in api reference
             },
-            // country: 'nl' // removed
+            country: 'nl'
         ],
         attributes: [
             {
